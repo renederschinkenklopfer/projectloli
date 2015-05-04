@@ -88,3 +88,10 @@ body {
     opacity: 0;
     filter: alpha(opacity=0);
 }
+
+
+
+/* Thread */
+.row {
+  margin-top: 40px;
+}
