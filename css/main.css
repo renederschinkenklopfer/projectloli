@@ -29,8 +29,8 @@ body {
 }
 
 
-.status-upload {
-	background: none repeat scroll 0 0 #f5f5f5;
+.postThread-comment {
+	background: none repeat scroll 0 0 #CCC;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	-ms-border-radius: 4px;
@@ -40,27 +40,13 @@ body {
 	width: 100%;
 }
 
-.status-upload  textarea {
-	background: none repeat scroll 0 0 #fff;
-	border: medium none;
-	-webkit-border-radius: 4px 4px 0 0;
-	-moz-border-radius: 4px 4px 0 0;
-	-ms-border-radius: 4px 4px 0 0;
-	-o-border-radius: 4px 4px 0 0;
-	border-radius: 4px 4px 0 0;
-	color: #777777;
+.postThread-comment  textarea {
 	float: left;
-	font-size: 14px;
-	height: 142px;
-	letter-spacing: 0.3px;
-	padding: 20px;
 	width: 100%;
 	resize:none;
-	outline:none;
-	border: 1px solid #F2F2F2;
 }
 
-.status-upload ul {
+.postThread-comment ul {
 	float: left;
 	list-style: none outside none;
 	margin: 0;
@@ -68,23 +54,14 @@ body {
 	width: auto;
 }
 
-.status-upload  button {
-	border: medium none;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	-ms-border-radius: 4px;
-	-o-border-radius: 4px;
-	border-radius: 4px;
-	color: #fff;
+.postThread-comment  button {
 	float: right;
-	font-size: 14px;
-	letter-spacing: 0.3px;
-	margin-right: 9px;
+	margin-right: 24px;
 	margin-top: 10px;
 	padding: 6px 15px;
 }
 
-.status-upload  button > i {
+.postThread-comment  button > i {
 	margin-right: 7px;
 }
 
