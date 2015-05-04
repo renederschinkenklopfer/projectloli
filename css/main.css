@@ -19,7 +19,95 @@ body {
   margin: 20px 0;
 }
 
+.thumb-title {
+	margin-bottom: 5px;
+}
+
 .col-md-3
 {
   margin-top: 30px;
+}
+
+
+.status-upload {
+	background: none repeat scroll 0 0 #f5f5f5;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-ms-border-radius: 4px;
+	-o-border-radius: 4px;
+	border-radius: 4px;
+	float: left;
+	width: 100%;
+}
+
+.status-upload  textarea {
+	background: none repeat scroll 0 0 #fff;
+	border: medium none;
+	-webkit-border-radius: 4px 4px 0 0;
+	-moz-border-radius: 4px 4px 0 0;
+	-ms-border-radius: 4px 4px 0 0;
+	-o-border-radius: 4px 4px 0 0;
+	border-radius: 4px 4px 0 0;
+	color: #777777;
+	float: left;
+	font-size: 14px;
+	height: 142px;
+	letter-spacing: 0.3px;
+	padding: 20px;
+	width: 100%;
+	resize:none;
+	outline:none;
+	border: 1px solid #F2F2F2;
+}
+
+.status-upload ul {
+	float: left;
+	list-style: none outside none;
+	margin: 0;
+	padding: 0 0 0 15px;
+	width: auto;
+}
+
+.status-upload  button {
+	border: medium none;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-ms-border-radius: 4px;
+	-o-border-radius: 4px;
+	border-radius: 4px;
+	color: #fff;
+	float: right;
+	font-size: 14px;
+	letter-spacing: 0.3px;
+	margin-right: 9px;
+	margin-top: 10px;
+	padding: 6px 15px;
+}
+
+.status-upload  button > i {
+	margin-right: 7px;
+}
+
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+}
+
+.fileUploadInput {
+	margin-top:9px;
+	background-color: transparent;
+	border: 0px solid;
+}
+
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
 }
