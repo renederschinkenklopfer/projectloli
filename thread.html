@@ -41,8 +41,8 @@
         </div>
       </div>
     </nav>
-
-    <div class="container">
+<div align="center">
+	<div class="container">
       <div class="row">
           <div class="col-md-6">
             <div style="background-color: #efefef; padding: 5px; padding-bottom: 7px; padding-top: 7px; border-bottom: 1px solid #ccc;">Anonymous <span class="pull-right">27 mins ago &nbsp;&nbsp;&nbsp; #5654654654</span></div>
@@ -69,6 +69,37 @@
           </div>
       </div>
     </div>
+
+	<a href="#" class="newThread hidden-sm hidden-md hidden-lg" >Reply</a>
+    <p class="newThread navbar-btn hidden-xs">
+		<a href="#" class="btn btn-primary">Reply</a>
+    </p>
+    </li>
+	<div align="left" class="container-fluid">
+	  <div id="postThread" style="display: none;" class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<form action="" method="post">
+				<p><input type="text" class="form-control" placeholder="Name"></p>
+				<p><input type="text" class="form-control" placeholder="Subject"></p>
+				<div class="postThread-comment">
+					<p><textarea placeholder="Comment" class="form-control" rows="4" noresize></textarea></p>
+					<ul>
+						<li>
+							<div class="fileUpload btn btn-default">
+								<span><i class="glyphicon glyphicon-picture"></i> Select</span>
+								<input id="uploadBtn" type="file" class="upload" />
+							</div>
+							<input id="uploadFile" class="fileUploadInput" placeholder="" disabled="disabled" />
+						</li>
+					</ul>
+					<button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-share"></i> Post</button>
+				</div>
+			</form>
+		</div>
+        <div class="col-md-3"></div>
+	  </div>
+</div>
 
     <footer class="footer">
       <div class="container">
