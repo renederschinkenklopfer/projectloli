@@ -23,6 +23,7 @@
 		</div>
     <div class="col-md-3"></div>
 	  </div>
+
     <?php
 
     foreach($this->threads as $key => $value)
@@ -34,9 +35,9 @@
       echo '
         <div class="col-md-3">
           <h4 class="thumb-title">' .$value->threadname .'</h4>
-          <small>' .$value->username .' <span class="pull-right">' .$value->date_created .' (3 mins ago)</span></small>
-          <a href="thread/' .$value->pk_thread_id .'"><img src="' .WORKING_DIR .'public/img/' .$value->image_name .'" width="950" class="img-responsive" alt=""></a>
-          <p><i class="glyphicon glyphicon-share-alt"></i> 3 Replies <span class="pull-right"><a href="thread/' .$value->pk_thread_id .'">#' .$value->pk_thread_id .'</a></span></p>
+          <small>' .$value->username .' <span class="pull-right">' .ThreadModel::getElapsedTime($value->date_created) .'</span></small>
+          <a href="computer/thread/' .$value->pk_thread_id .'"><img src="' .WORKING_DIR .'public/img/' .$value->image_name .'" width="950" class="img-responsive" alt=""></a>
+          <p><i class="glyphicon glyphicon-share-alt"></i> 3 Replies <span class="pull-right"><a href="computer/thread/' .$value->pk_thread_id .'">#' .$value->pk_thread_id .'</a></span></p>
         </div>';
       if($key % 4 == 3)
       {

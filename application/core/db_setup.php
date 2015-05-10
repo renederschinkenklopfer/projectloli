@@ -28,7 +28,7 @@
 	CREATE TABLE thread
 	(
 		pk_thread_id INT PRIMARY KEY AUTO_INCREMENT,
-		username VARCHAR(20),
+		username VARCHAR(20) NOT NULL,
 		threadname VARCHAR(50) NOT NULL,
 		message TEXT NOT NULL,
 		image_name VARCHAR(25) NOT NULL,
@@ -53,46 +53,49 @@
 
 	$database->query("INSERT INTO `webapp`.`board` (`pk_board_id`, `board_name`) VALUES (NULL, 'Computer/Tech');");
 	$database->query("INSERT INTO `webapp`.`thread` (`pk_thread_id`, `username`, `threadname`, `message`, `image_name`, `likes`, `date_created`, `fk_board_id`) VALUES (NULL, 'Anonymous', 'Jo so lässig', 'hoi zäme, also ich finds eifach würkli eh saueri was mit dem wc-rand passiert isch
-	lg anon', '1337.jpg', '133', CURRENT_TIMESTAMP, '1');");
+	lg anon', '1337.jpg', '133', '2015-05-10 15:00:23', '1');");
 	$database->query("INSERT INTO `webapp`.`thread` (`pk_thread_id`, `username`, `threadname`, `message`, `image_name`, `likes`, `date_created`, `fk_board_id`) VALUES (NULL, 'Anonymous', 'g654g', 'hoi zäme, also ich finds eifach würkli eh saueri was mit dem wc-rand passiert isch
-	lg anon', '1338.jpg', '133', CURRENT_TIMESTAMP, '1');");
+	lg anon', '1338.jpg', '133', '2015-05-10 15:00:23', '1');");
 	$database->query("INSERT INTO `webapp`.`thread` (`pk_thread_id`, `username`, `threadname`, `message`, `image_name`, `likes`, `date_created`, `fk_board_id`) VALUES (NULL, 'Anonymous', '777777', 'hoi zäme, also ich finds eifach würkli eh saueri was mit dem wc-rand passiert isch
-	lg anon', '1339.jpg', '133', CURRENT_TIMESTAMP, '1');");
+	lg anon', '1339.jpg', '133', '2015-05-10 15:00:23', '1');");
 	$database->query("INSERT INTO `webapp`.`thread` (`pk_thread_id`, `username`, `threadname`, `message`, `image_name`, `likes`, `date_created`, `fk_board_id`) VALUES (NULL, 'Anonymous', 'j67j67j', 'hoi zäme, also ich finds eifach würkli eh saueri was mit dem wc-rand passiert isch
-	lg anon', '1338.jpg', '133', CURRENT_TIMESTAMP, '1');");
+	lg anon', '1338.jpg', '133', '2015-05-10 15:00:23', '1');");
 	$database->query("INSERT INTO `webapp`.`thread` (`pk_thread_id`, `username`, `threadname`, `message`, `image_name`, `likes`, `date_created`, `fk_board_id`) VALUES (NULL, 'Anonymous', 'My new Setup', 'hoi zäme, also ich finds eifach würkli eh saueri was mit dem wc-rand passiert isch
-	lg anon', '1339.jpg', '133', CURRENT_TIMESTAMP, '1');");
+	lg anon', '1339.jpg', '133', '2015-05-10 15:00:23', '1');");
 	$database->query("INSERT INTO `webapp`.`thread` (`pk_thread_id`, `username`, `threadname`, `message`, `image_name`, `likes`, `date_created`, `fk_board_id`) VALUES (NULL, 'Anonymous', 'My new Setup', 'hoi zäme, also ich finds eifach würkli eh saueri was mit dem wc-rand passiert isch
-	lg anon', '1339.jpg', '133', CURRENT_TIMESTAMP, '1');");
+	lg anon', '1339.jpg', '133', '2015-05-10 15:00:23', '1');");
 	$database->query("INSERT INTO `webapp`.`thread` (`pk_thread_id`, `username`, `threadname`, `message`, `image_name`, `likes`, `date_created`, `fk_board_id`) VALUES (NULL, 'Anonymous', 'My new Setup', 'hoi zäme, also ich finds eifach würkli eh saueri was mit dem wc-rand passiert isch
-	lg anon', '1339.jpg', '133', CURRENT_TIMESTAMP, '1');");
+	lg anon', '1339.jpg', '133', '2015-05-10 15:00:23', '1');");
 	$database->query("INSERT INTO `webapp`.`thread` (`pk_thread_id`, `username`, `threadname`, `message`, `image_name`, `likes`, `date_created`, `fk_board_id`) VALUES (NULL, 'Anonymous', 'My new Setup', 'hoi zäme, also ich finds eifach würkli eh saueri was mit dem wc-rand passiert isch
-	lg anon', '1339.jpg', '133', CURRENT_TIMESTAMP, '1');");
+	lg anon', '1339.jpg', '133', '2015-05-10 15:00:23', '1');");
 	$database->query("INSERT INTO `webapp`.`thread` (`pk_thread_id`, `username`, `threadname`, `message`, `image_name`, `likes`, `date_created`, `fk_board_id`) VALUES (NULL, 'Anonymous', 'My new Setup', 'hoi zäme, also ich finds eifach würkli eh saueri was mit dem wc-rand passiert isch
-	lg anon', '1339.jpg', '133', CURRENT_TIMESTAMP, '1');");
+	lg anon', '1339.jpg', '133', '2015-05-10 15:00:23', '1');");
 	$database->query("INSERT INTO `webapp`.`thread` (`pk_thread_id`, `username`, `threadname`, `message`, `image_name`, `likes`, `date_created`, `fk_board_id`) VALUES (NULL, 'Anonymous', 'My new Setup', 'hoi zäme, also ich finds eifach würkli eh saueri was mit dem wc-rand passiert isch
-	lg anon', '1339.jpg', '133', CURRENT_TIMESTAMP, '1');");
+	lg anon', '1339.jpg', '133', '2015-05-10 15:00:23', '1');");
 	$database->query("INSERT INTO `webapp`.`thread` (`pk_thread_id`, `username`, `threadname`, `message`, `image_name`, `likes`, `date_created`, `fk_board_id`) VALUES (NULL, 'Anonymous', 'My new Setup', 'hoi zäme, also ich finds eifach würkli eh saueri was mit dem wc-rand passiert isch
-	lg anon', '1339.jpg', '133', CURRENT_TIMESTAMP, '1');");
+	lg anon', '1339.jpg', '133', '2015-05-10 15:00:23', '1');");
 	$database->query("INSERT INTO `webapp`.`thread` (`pk_thread_id`, `username`, `threadname`, `message`, `image_name`, `likes`, `date_created`, `fk_board_id`) VALUES (NULL, 'Anonymous', 'My new Setup', 'hoi zäme, also ich finds eifach würkli eh saueri was mit dem wc-rand passiert isch
-	lg anon', '1339.jpg', '133', CURRENT_TIMESTAMP, '1');");
+	lg anon', '1339.jpg', '133', '2015-05-10 15:00:23', '1');");
 	$database->query("INSERT INTO `webapp`.`thread` (`pk_thread_id`, `username`, `threadname`, `message`, `image_name`, `likes`, `date_created`, `fk_board_id`) VALUES (NULL, 'Anonymous', 'My new Setup', 'hoi zäme, also ich finds eifach würkli eh saueri was mit dem wc-rand passiert isch
-	lg anon', '1339.jpg', '133', CURRENT_TIMESTAMP, '1');");
+	lg anon', '1339.jpg', '133', '2015-05-10 15:00:23', '1');");
 	$database->query("INSERT INTO `webapp`.`thread` (`pk_thread_id`, `username`, `threadname`, `message`, `image_name`, `likes`, `date_created`, `fk_board_id`) VALUES (NULL, 'Anonymous', 'My new Setup', 'hoi zäme, also ich finds eifach würkli eh saueri was mit dem wc-rand passiert isch
-	lg anon', '1339.jpg', '133', CURRENT_TIMESTAMP, '1');");
+	lg anon', '1339.jpg', '133', '2015-05-10 15:00:23', '1');");
 	$database->query("INSERT INTO `webapp`.`thread` (`pk_thread_id`, `username`, `threadname`, `message`, `image_name`, `likes`, `date_created`, `fk_board_id`) VALUES (NULL, 'Anonymous', 'My new Setup', 'hoi zäme, also ich finds eifach würkli eh saueri was mit dem wc-rand passiert isch
-	lg anon', '1339.jpg', '133', CURRENT_TIMESTAMP, '1');");
+	lg anon', '1339.jpg', '133', '2015-05-10 15:00:23', '1');");
 	$database->query("INSERT INTO `webapp`.`thread` (`pk_thread_id`, `username`, `threadname`, `message`, `image_name`, `likes`, `date_created`, `fk_board_id`) VALUES (NULL, 'Anonymous', 'My new Setup', 'hoi zäme, also ich finds eifach würkli eh saueri was mit dem wc-rand passiert isch
-	lg anon', '1339.jpg', '133', CURRENT_TIMESTAMP, '1');");
+	lg anon', '1339.jpg', '133', '2015-05-10 15:00:23', '1');");
 	$database->query("INSERT INTO `webapp`.`thread` (`pk_thread_id`, `username`, `threadname`, `message`, `image_name`, `likes`, `date_created`, `fk_board_id`) VALUES (NULL, 'Anonymous', 'My new Setup', 'hoi zäme, also ich finds eifach würkli eh saueri was mit dem wc-rand passiert isch
-	lg anon', '1339.jpg', '133', CURRENT_TIMESTAMP, '1');");
+	lg anon', '1339.jpg', '133', '2015-05-10 15:00:23', '1');");
 	$database->query("INSERT INTO `webapp`.`thread` (`pk_thread_id`, `username`, `threadname`, `message`, `image_name`, `likes`, `date_created`, `fk_board_id`) VALUES (NULL, 'Anonymous', 'My new Setup', 'hoi zäme, also ich finds eifach würkli eh saueri was mit dem wc-rand passiert isch
-	lg anon', '1339.jpg', '133', CURRENT_TIMESTAMP, '1');");
+	lg anon', '1339.jpg', '133', '2015-05-10 15:00:23', '1');");
 	$database->query("INSERT INTO `webapp`.`thread` (`pk_thread_id`, `username`, `threadname`, `message`, `image_name`, `likes`, `date_created`, `fk_board_id`) VALUES (NULL, 'Anonymous', 'My new Setup', 'hoi zäme, also ich finds eifach würkli eh saueri was mit dem wc-rand passiert isch
-	lg anon', '1339.jpg', '133', CURRENT_TIMESTAMP, '1');");
+	lg anon', '1339.jpg', '133', '2015-05-10 15:00:23', '1');");
 	$database->query("INSERT INTO `webapp`.`thread` (`pk_thread_id`, `username`, `threadname`, `message`, `image_name`, `likes`, `date_created`, `fk_board_id`) VALUES (NULL, 'Anonymous', 'My new Setup', 'hoi zäme, also ich finds eifach würkli eh saueri was mit dem wc-rand passiert isch
-	lg anon', '1339.jpg', '133', CURRENT_TIMESTAMP, '1');");
+	lg anon', '1339.jpg', '133', '2015-05-10 15:00:23', '1');");
 	$database->query("INSERT INTO `webapp`.`thread` (`pk_thread_id`, `username`, `threadname`, `message`, `image_name`, `likes`, `date_created`, `fk_board_id`) VALUES (NULL, 'Anonymous', 'My new Setup', 'hoi zäme, also ich finds eifach würkli eh saueri was mit dem wc-rand passiert isch
-	lg anon', '1339.jpg', '133', CURRENT_TIMESTAMP, '1');");
+	lg anon', '1339.jpg', '133', '2015-05-10 15:00:23', '1');");
+	$database->query("INSERT INTO `webapp`.`post` (`pk_post_id`, `username`, `message`, `image_name`, `date_created`, `fk_thread_id`) VALUES (NULL, 'Anon', 'aha alles kla', '1338.jpg', '2015-05-10 20:57:25', '1');");
+	$database->query("INSERT INTO `webapp`.`post` (`pk_post_id`, `username`, `message`, `image_name`, `date_created`, `fk_thread_id`) VALUES (NULL, 'Anon', 'aha alles kla', '1338.jpg', '2015-05-10 20:57:25', '1');");
+
 
 ?>

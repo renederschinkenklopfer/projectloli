@@ -4,27 +4,26 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>This is why i'm laughing</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/main.css" rel="stylesheet">
+    <title><?php echo $this->title .' - ' .WEBAPP_NAME; ?></title>
+    <link href="<?php echo WORKING_DIR ?>public/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo WORKING_DIR ?>public/css/main.css" rel="stylesheet">
   </head>
   <body>
-    <div align="center"><img src="img/achtung.png" height="250px" width="250px"/>
+    <div align="center"><img src="<?php echo WORKING_DIR ?>public/img/nsfw.png" class="img-resonsive" />
 	<div class="alert alert-danger" role="alert">Warnung! Sie sind im Begriff anstössige Inhalte zu erblicken. Wenn Sie unter 18 Jahre alt sind, ist es Ihnen nicht erlaubt diese Seite zu betreten.</div>
-	<h2><a href="18.html">Ja</a>, ich bin +18 Jahre alt. </h2>
-	<h3><a href="index.html">Nein</a>, ich bin unter 18 Jahre alt</h3>
+	<h2><a href="<?php echo WORKING_DIR ?>nsfw">Ja</a>, ich bin +18 Jahre alt. </h2>
+	<h3><a href="<?php echo WORKING_DIR ?>">Nein</a>, ich bin unter 18 Jahre alt</h3>
 
 	</div>
 
+      <footer class="footer">
+        <div class="container">
+          <p class="text-muted">All rights reserved. René Hammel Inc.</p>
+        </div>
+      </footer>
 
-    <footer class="footer">
-      <div align="center" class="container">
-        <p class="text-muted">All rights reserved. René Hammel Inc.</p>
-      </div>
-    </footer>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-	<script src="js/main.js"></script>
-  </body>
-</html>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+      <script src="<?php echo WORKING_DIR ?>public/js/bootstrap.min.js"></script>
+      <script src="<?php echo WORKING_DIR ?>public/js/main.js"></script>
+    </body>
+  </html>

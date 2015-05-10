@@ -11,16 +11,18 @@
 
 		public function loadModel($model)
 		{
-			if(file_exists(MODEL_PATH . $model . ".model.php"))
+			if(file_exists(MODEL_PATH . $model . "Model.php"))
 			{
-				require_once MODEL_PATH . $model . ".model.php";
+				require_once MODEL_PATH . $model . "Model.php";
 			}
 			else
 			{
-				exit ('The file ' . $model . '.model.php is missing in the model folder.');
+				exit ('The file ' . $model . 'Model.php is missing in the model folder.');
 			}
 
-			return new $model();
+			$model_name = $model ."Model";
+
+			return new $model_name();
 		}
 
 

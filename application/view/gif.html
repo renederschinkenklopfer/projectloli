@@ -1,46 +1,3 @@
-<!DOCTYPE html>
-<html lang="de">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>This is why i'm laughing</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/main.css" rel="stylesheet">
-  </head>
-  <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="index.html"><font color="orange">This is why i'm laughing</font></a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="index.html">New</a></li>
-            <li><a href="computer.html">Computer/Tech</a></li>
-            <li class="active"><a href="gif.html">Gif</a></li>
-            <li><a href="over18.html">+18</a></li>
-            <li><a href="popular.html">Most Popular</a></li>
-            <li><a href="rated.html">Best rated</a></li>
-            <li><a href="videos.html">Videos</a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li>
-              <a href="#" class="newThread hidden-sm hidden-md hidden-lg" >New Thread</a>
-              <p class="newThread navbar-btn hidden-xs">
-                <a href="#" class="btn btn-primary">New Thread</a>
-              </p>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
 
     <div class="container-fluid">
 	  <div id="postThread" style="display: none;" class="row">
@@ -64,93 +21,52 @@
 				</div>
 			</form>
 		</div>
-        <div class="col-md-3"></div>
+    <div class="col-md-3"></div>
 	  </div>
 
-      <div class="row">
+    <?php
+
+    foreach($this->threads as $key => $value)
+    {
+      if($key % 4 == 0)
+      {
+        echo '<div class="row">';
+      }
+      echo '
         <div class="col-md-3">
-          <h4 class="thumb-title">My new Setup</h4>
-		  <small>Anonymous <span class="pull-right">3 mins ago</span></small>
-          <a href=""><img src="img/1339.jpg" width="950" class="img-responsive" alt=""></a>
-		  <p><i class="glyphicon glyphicon-share-alt"></i> 3 Replies <span class="pull-right"><a href="">#546456</a></span></p>
-        </div>
-        <div class="col-md-3">
-          <h4 class="thumb-title">fwefewfewf</h4>
-		  <small>Anonymous <span class="pull-right">3 mins ago</span></small>
-          <a href=""><img src="img/1338.jpg" width="950" class="img-responsive" alt=""></a>
-          <p><i class="glyphicon glyphicon-share-alt"></i> 3 Replies <span class="pull-right"><a href="">#546456</a></span></p>
-        </div>
-        <div class="col-md-3">
-          <h4 class="thumb-title">fwefewfewf</h4>
-		  <small>Anonymous <span class="pull-right">3 mins ago</span></small>
-          <a href=""><img src="img/1337.jpg" width="950" class="img-responsive" alt=""></a>
-          <p><i class="glyphicon glyphicon-share-alt"></i> 3 Replies <span class="pull-right"><a href="">#546456</a></span></p>
-        </div>
-        <div class="col-md-3">
-          <h4 class="thumb-title">fwefewfewf</h4>
-		  <small>Anonymous <span class="pull-right">3 mins ago</span></small>
-          <a href=""><img src="img/1339.jpg" width="950" class="img-responsive" alt=""></a>
-          <p><i class="glyphicon glyphicon-share-alt"></i> 3 Replies <span class="pull-right"><a href="">#546456</a></span></p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-3">
-          <h4 class="thumb-title">fwefewfewf</h4>
-		  <small>Anonymous <span class="pull-right">3 mins ago</span></small>
-          <a href=""><img src="img/1337.jpg" width="950" class="img-responsive" alt=""></a>
-          <p><i class="glyphicon glyphicon-share-alt"></i> 3 Replies <span class="pull-right"><a href="">#546456</a></span></p>
-        </div>
-        <div class="col-md-3">
-          <h4 class="thumb-title">fwefewfewf</h4>
-		  <small>Anonymous <span class="pull-right">3 mins ago</span></small>
-          <a href=""><img src="img/1337.jpg" width="950" class="img-responsive" alt=""></a>
-          <p><i class="glyphicon glyphicon-share-alt"></i> 3 Replies <span class="pull-right"><a href="">#546456</a></span></p>
-        </div>
-        <div class="col-md-3">
-          <h4 class="thumb-title">fwefewfewf</h4>
-		  <small>Anonymous <span class="pull-right">3 mins ago</span></small>
-          <a href=""><img src="img/1338.jpg" width="950" class="img-responsive" alt=""></a>
-          <p><i class="glyphicon glyphicon-share-alt"></i> 3 Replies <span class="pull-right"><a href="">#546456</a></span></p>
-        </div>
-        <div class="col-md-3">
-          <h4 class="thumb-title">fwefewfewf</h4>
-		  <small>Anonymous <span class="pull-right">3 mins ago</span></small>
-          <a href=""><img src="img/1339.jpg" width="950" class="img-responsive" alt=""></a>
-          <p><i class="glyphicon glyphicon-share-alt"></i> 3 Replies <span class="pull-right"><a href="">#546456</a></span></p>
-        </div>
-      </div>
+          <h4 class="thumb-title">' .$value->threadname .'</h4>
+          <small>' .$value->username .' <span class="pull-right">' .ThreadModel::getElapsedTime($value->date_created) .'</span></small>
+          <a href="thread/' .$value->pk_thread_id .'"><img src="' .WORKING_DIR .'public/img/' .$value->image_name .'" width="950" class="img-responsive" alt=""></a>
+          <p><i class="glyphicon glyphicon-share-alt"></i> 3 Replies <span class="pull-right"><a href="thread/' .$value->pk_thread_id .'">#' .$value->pk_thread_id .'</a></span></p>
+        </div>';
+      if($key % 4 == 3)
+      {
+        echo '</div>';
+      }
+    }
+
+    ?>
     </div>
-<div align="center">
-	<nav>
-  <ul class="pagination">
-    <li>
-      <a href="#" aria-label="Zurück">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    <li><a href="#">1</a></li>
-    <li><a href="#">2</a></li>
-    <li><a href="#">3</a></li>
-    <li><a href="#">4</a></li>
-    <li><a href="#">5</a></li>
-    <li>
-      <a href="#" aria-label="Weiter">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav>
-</div>
 
-
-    <footer class="footer">
-      <div class="container">
-        <p class="text-muted">All rights reserved. René Hammel Inc.</p>
-      </div>
-    </footer>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-	<script src="js/main.js"></script>
-  </body>
-</html>
+		<div align="center">
+			<nav>
+			  <ul class="pagination">
+				<li>
+				  <a href="#" aria-label="Zurück">
+					<span aria-hidden="true">&laquo;</span>
+				  </a>
+				</li>
+				<li><a href="#">1</a></li>
+				<li><a href="#">2</a></li>
+				<li><a href="#">3</a></li>
+				<li><a href="#">4</a></li>
+				<li><a href="#">5</a></li>
+				<li>
+				  <a href="#" aria-label="Weiter">
+					<span aria-hidden="true">&raquo;</span>
+				  </a>
+				</li>
+			  </ul>
+			</nav>
+		</div>
+    </div>

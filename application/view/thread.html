@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Webapp</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/main.css" rel="stylesheet">
+    <title><?php echo $this->title .' - ' .WEBAPP_NAME; ?></title>
+    <link href="<?php echo WORKING_DIR ?>public/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo WORKING_DIR ?>public/css/main.css" rel="stylesheet">
   </head>
   <body>
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -18,23 +18,23 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Webapp</a>
+          <a class="navbar-brand" href="<?php echo WORKING_DIR ?>"><font color="orange"><?php echo WEBAPP_NAME; ?></font></a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="new/">New</a></li>
-            <li><a href="c">Computer/Tech</a></li>
-            <li><a href="gif/">Gif</a></li>
-            <li><a href="gif/">Fefwef</a></li>
-            <li><a href="gif/">addasd</a></li>
-            <li><a href="c/">wefeww</a></li>
-            <li><a href="gif/">fwefgrthrh</a></li>
+            <li class="<?php if(get_class($this) == 'Index') { echo 'active'; } ?>" ><a href="<?php echo WORKING_DIR ?>">New</a></li>
+            <li class="<?php if(get_class($this) == 'Computer') { echo 'active'; } ?>"><a href="<?php echo WORKING_DIR ?>computer/">Computer/Tech</a></li>
+            <li class="<?php if(get_class($this) == 'Gif') { echo 'active'; } ?>"><a href="<?php echo WORKING_DIR ?>gif/">Gif</a></li>
+            <li class="<?php if(get_class($this) == 'Nsfw') { echo 'active'; } ?>"><a href="<?php echo WORKING_DIR ?>over18/">+18</a></li>
+            <li class="<?php if(get_class($this) == 'Popular') { echo 'active'; } ?>"><a href="<?php echo WORKING_DIR ?>popular/">Most Popular</a></li>
+            <li class="<?php if(get_class($this) == 'Rated') { echo 'active'; } ?>"><a href="<?php echo WORKING_DIR ?>rated/">Best rated</a></li>
+            <li class="<?php if(get_class($this) == 'Videos') { echo 'active'; } ?>"><a href="<?php echo WORKING_DIR ?>videos/">Videos</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <a href="#" class="newThread hidden-sm hidden-md hidden-lg" >Reply</a>
+              <a href="#" class="newThread hidden-sm hidden-md hidden-lg" >New Post</a>
               <p class="newThread navbar-btn hidden-xs">
-                <a href="#" class="btn btn-primary">Reply</a>
+                <a href="#" class="btn btn-primary">New Post</a>
               </p>
             </li>
           </ul>
@@ -43,41 +43,58 @@
     </nav>
 
     <div class="container">
-      <div class="row">
-          <div class="col-md-6">
-            <div style="background-color: #efefef; padding: 5px; padding-bottom: 7px; padding-top: 7px; border-bottom: 1px solid #ccc;">Anonymous <span class="pull-right">27 mins ago &nbsp;&nbsp;&nbsp; #5654654654</span></div>
-            <img src="img/1337.jpg" width="300" class="img-responsive" alt="">
-            <div style="margin-top: 8px; border-bottom: 1px solid #ccc; padding-bottom: 20px;">Hi geeee fiuewhf iwuefh weihf iwe hfiwehfweiufh wiuefh wiuefh wiuefh wiuefh wiuefh wiuefh wiuefh wiuefh wiuefh wiuefh wiuefh wiuefh wiuefh wiuefh wiuefh wiuefh wiuefh wiuefh wiuefh wiuefh wiuefh wiuefh wiuefh weiuf hiuwef hiuwehf iewh iuhf</div>
+      <h1><?php echo $this->thread->threadname; ?></h1>
+      <div id="postThread" style="display: none;" class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <form action="" method="post">
+          <p><input type="text" class="form-control" placeholder="Name"></p>
+          <div class="postThread-comment">
+            <p><textarea placeholder="Comment" class="form-control" rows="4" noresize></textarea></p>
+            <ul>
+              <li>
+                <div class="fileUpload btn btn-default">
+                  <span><i class="glyphicon glyphicon-picture"></i> Select</span>
+                  <input id="uploadBtn" type="file" class="upload" />
+                </div>
+                <input id="uploadFile" class="fileUploadInput" placeholder="" disabled="disabled" />
+              </li>
+            </ul>
+            <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-share"></i> Post</button>
           </div>
+        </form>
+      </div>
+      <div class="col-md-3"></div>
       </div>
       <div class="row">
-          <div class="col-md-6">
-            <div style="background-color: #efefef; padding: 5px; padding-bottom: 7px; padding-top: 7px; border-bottom: 1px solid #ccc;">Anonymous <span class="pull-right">27 mins ago &nbsp;&nbsp;&nbsp; #5654654654</span></div>
-            <div style="margin-top: 8px; border-bottom: 1px solid #ccc; padding-bottom: 20px;">Hi geeee fiuewhf iwuefh weihf iwe hfiwehfweiufh wiuefh wiuefh wiuefh wiuefh wiuefh wiuefh wiuefh wiuefh wiuefh wiuefh wiuefh wiuefh wiuefh wiuefh wiuefh wiuefh wiuefh wiuefh wiuefh wiuefh wiuefh wiuefh wiuefh weiuf hiuwef hiuwehf iewh iuhf</div>
-          </div>
+          <div class="col-md-12"><b><?php echo $this->thread->username; ?></b> (ID: p3YAAy5z) <span class="pull-right"><?php echo PostModel::getElapsedTime($this->thread->date_created); ?> &nbsp; #<?php echo $this->thread->pk_thread_id; ?></span></div>
+          <div class="col-md-3"><img src="<?php echo WORKING_DIR ?>public/img/<?php echo $this->thread->image_name; ?>" class="img-responsive" /></div>
+          <div class="col-md-9"><?php echo $this->thread->message; ?></div>
+          <div class="col-md-12"><span class="pull-right"><a href="">Reply</a></span></div>
       </div>
-      <div class="row">
-          <div class="col-md-6">
-            <div style="background-color: #efefef; padding: 5px; padding-bottom: 7px; padding-top: 7px; border-bottom: 1px solid #ccc;">Anonymous <span class="pull-right">27 mins ago &nbsp;&nbsp;&nbsp; #5654654654</span></div>
-            <div style="margin-top: 8px; border-bottom: 1px solid #ccc; padding-bottom: 20px;">Hgferger greg regrehf</div>
-          </div>
-      </div>
-      <div class="row">
-          <div class="col-md-6">
-            <div style="background-color: #efefef; padding: 5px; padding-bottom: 7px; padding-top: 7px; border-bottom: 1px solid #ccc;">Anonymous <span class="pull-right">27 mins ago &nbsp;&nbsp;&nbsp; #5654654654</span></div>
-            <div style="margin-top: 8px; border-bottom: 1px solid #ccc; padding-bottom: 20px;">Hgferger greg regrehf</div>
-          </div>
-      </div>
+      <?php
+
+        foreach($this->posts as $key => $value)
+        {
+          echo '
+          <div class="row">
+              <div class="col-md-12"><b>' .$value->username .'</b> (ID: p3YAAy5z) <span class="pull-right">' .PostModel::getElapsedTime($value->date_created) .' &nbsp; #' .$value->pk_post_id .'</span></div>
+              <div class="col-md-3"><img src="' .WORKING_DIR .'public/img/' .$value->image_name .'" class="img-responsive" /></div>
+              <div class="col-md-9">' .$value->message .'</div>
+              <div class="col-md-12"><span class="pull-right"><a href="">Reply</a></span></div>
+          </div>';
+        }
+      ?>
     </div>
 
-    <footer class="footer">
-      <div class="container">
-        <p class="text-muted">All rights reserved. Huan Inc.</p>
-      </div>
-    </footer>
+        <footer class="footer">
+          <div class="container">
+            <p class="text-muted">All rights reserved. René Hammel Inc.</p>
+          </div>
+        </footer>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-	<script src="js/main.js"></script>
-  </body>
-</html>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="<?php echo WORKING_DIR ?>public/js/bootstrap.min.js"></script>
+        <script src="<?php echo WORKING_DIR ?>public/js/main.js"></script>
+      </body>
+    </html>
