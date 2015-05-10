@@ -1,4 +1,6 @@
+Options -MultiViews
 RewriteEngine On
+Options -Indexes
 
 RewriteBase /projectloli/
 

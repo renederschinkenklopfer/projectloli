@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><?php echo $this->title .' - ' .WEBAPP_NAME; ?></title>
+    <link href="<?php echo WORKING_DIR ?>public/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo WORKING_DIR ?>public/css/main.css" rel="stylesheet">
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="<?php echo WORKING_DIR ?>"><font color="orange"><?php echo WEBAPP_NAME; ?></font></a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="<?php if(get_class($this) == 'Index') { echo 'active'; } ?>" ><a href="<?php echo WORKING_DIR ?>">New</a></li>
+            <li class="<?php if(get_class($this) == 'Computer') { echo 'active'; } ?>"><a href="<?php echo WORKING_DIR ?>computer/">Computer/Tech</a></li>
+            <li class="<?php if(get_class($this) == 'Gif') { echo 'active'; } ?>"><a href="<?php echo WORKING_DIR ?>gif/">Gif</a></li>
+            <li class="<?php if(get_class($this) == 'Over18') { echo 'active'; } ?>"><a href="<?php echo WORKING_DIR ?>over18/">+18</a></li>
+            <li class="<?php if(get_class($this) == 'Popular') { echo 'active'; } ?>"><a href="<?php echo WORKING_DIR ?>popular/">Most Popular</a></li>
+            <li class="<?php if(get_class($this) == 'Rated') { echo 'active'; } ?>"><a href="<?php echo WORKING_DIR ?>rated/">Best rated</a></li>
+            <li class="<?php if(get_class($this) == 'Videos') { echo 'active'; } ?>"><a href="<?php echo WORKING_DIR ?>videos/">Videos</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="#" class="newThread hidden-sm hidden-md hidden-lg" >New Thread</a>
+              <p class="newThread navbar-btn hidden-xs">
+                <a href="#" class="btn btn-primary">New Thread</a>
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
