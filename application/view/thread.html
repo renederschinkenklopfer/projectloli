@@ -43,7 +43,6 @@
     </nav>
 
     <div class="container">
-      <h1><?php echo $this->thread->threadname; ?></h1>
       <div id="postThread" style="display: none;" class="row">
       <div class="col-md-3"></div>
       <div class="col-md-6">
@@ -67,10 +66,10 @@
       <div class="col-md-3"></div>
       </div>
       <div class="row">
-          <div class="col-md-12"><b><?php echo $this->thread->username; ?></b> (ID: p3YAAy5z) <span class="pull-right"><?php echo PostModel::getElapsedTime($this->thread->date_created); ?> &nbsp; #<?php echo $this->thread->pk_thread_id; ?></span></div>
-          <div class="col-md-3"><img src="<?php echo WORKING_DIR ?>public/img/<?php echo $this->thread->image_name; ?>" class="img-responsive" /></div>
-          <div class="col-md-9"><?php echo $this->thread->message; ?></div>
-          <div class="col-md-12"><span class="pull-right"><a href="">Reply</a></span></div>
+          <div class="col-xs-12"><b><?php echo $this->thread->username; ?></b> (ID: p3YAAy5z) <span class="pull-right"><?php echo PostModel::getElapsedTime($this->thread->date_created); ?> &nbsp; #<?php echo $this->thread->pk_thread_id; ?></span></div>
+          <div class="col-xs-4 col-md-3"><img src="<?php echo WORKING_DIR ?>public/img/<?php echo $this->thread->image_name; ?>" class="img-responsive" /></div>
+          <div class="col-xs-8 col-md-9"><h4 style="margin-top: 0px;"><?php echo $this->thread->threadname; ?></h4><?php echo $this->thread->message; ?></div>
+          <div class="col-xs-12"><span class="pull-right"><a href="">Reply</a></span></div>
       </div>
       <?php
 
@@ -78,10 +77,10 @@
         {
           echo '
           <div class="row">
-              <div class="col-md-12"><b>' .$value->username .'</b> (ID: p3YAAy5z) <span class="pull-right">' .PostModel::getElapsedTime($value->date_created) .' &nbsp; #' .$value->pk_post_id .'</span></div>
-              <div class="col-md-3"><img src="' .WORKING_DIR .'public/img/' .$value->image_name .'" class="img-responsive" /></div>
-              <div class="col-md-9">' .$value->message .'</div>
-              <div class="col-md-12"><span class="pull-right"><a href="">Reply</a></span></div>
+              <div class="col-xs-12"><b>' .$value->username .'</b> (ID: p3YAAy5z) <span class="pull-right">' .PostModel::getElapsedTime($value->date_created) .' &nbsp; #' .$value->pk_post_id .'</span></div>
+              <div class="col-xs-4 col-md-3"><img src="' .WORKING_DIR .'public/img/' .$value->image_name .'" class="img-responsive" /></div>
+              <div class="col-xs-8 col-md-9">' .$value->message .'</div>
+              <div class="col-xs-12"><span class="pull-right"><a href="">Reply</a></span></div>
           </div>';
         }
       ?>
