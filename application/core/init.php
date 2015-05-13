@@ -21,5 +21,5 @@
 	Die ganze Datenbank wird mit Folgendem Code jedes mal gelöscht
 	und neu erstellt um Änderungen in der Datenbankstrukutr
 	sofort wirksam zu machen*/
-	require_once('application/core/db_setup.php');
+	//require_once('application/core/db_setup.php');
 ?>

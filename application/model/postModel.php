@@ -3,6 +3,17 @@
   class PostModel
   {
 
+	 public function createPost($thread_id, $username, $comment, $image_name)
+    {
+      $database = Database::getFactory()->getConnection();
+
+      $sql = "INSERT INTO `webapp`.`post` (`username`, `message`, `image_name`, `date_created`, `fk_thread_id`) VALUES (:username, :comment, :image_name, CURRENT_TIMESTAMP, :thread_id);";
+      $query = $database->prepare($sql);
+      $query->execute(array(':username' => $username, ':comment' => $comment, ':image_name' => $image_name, ':thread_id' => $thread_id));
+
+    }
+ 
+
     public function getThreadPost($thread_id)
     {
       $database = Database::getFactory()->getConnection();
