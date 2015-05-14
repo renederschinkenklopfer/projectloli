@@ -14,10 +14,5 @@
 			$this->title = "New";
 			$this->renderLayoutView('index', ['threads' => $threadModel->getAllThreads()]);
 		}
-
-		public function test()
-		{
-			echo "index/test";
-		}
 	}
 ?>

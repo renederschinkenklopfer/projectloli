@@ -6,6 +6,8 @@
 		function __construct()
 		{
 
+			//Auf jeder Seite eine Session starten
+			Session::start();
 		}
 
 

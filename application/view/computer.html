@@ -3,16 +3,16 @@
 	  <div id="postThread" style="display: none;" class="row">
 		<div class="col-md-3"></div>
 		<div class="col-md-6">
-			<form action="" method="post">
-				<p><input type="text" class="form-control" placeholder="Name"></p>
-				<p><input type="text" class="form-control" placeholder="Subject"></p>
+			<form action="<?php echo WORKING_DIR; ?>computer/create" method="post" enctype="multipart/form-data">
+				<p><input type="text" class="form-control" name="username" placeholder="Name" value="Anonymous"></p>
+				<p><input type="text" class="form-control" name="subject" placeholder="Subject"></p>
 				<div class="postThread-comment">
-					<p><textarea placeholder="Comment" class="form-control" rows="4" noresize></textarea></p>
+					<p><textarea placeholder="Comment" name="comment" class="form-control" rows="4" noresize></textarea></p>
 					<ul>
 						<li>
 							<div class="fileUpload btn btn-default">
 								<span><i class="glyphicon glyphicon-picture"></i> Select</span>
-								<input id="uploadBtn" type="file" class="upload" />
+								<input id="uploadBtn" name="fileToUpload" type="file" class="upload" />
 							</div>
 							<input id="uploadFile" class="fileUploadInput" placeholder="" disabled="disabled" />
 						</li>
@@ -37,8 +37,15 @@
           <h4 class="thumb-title">' .$value->threadname .'</h4>
           <small>' .$value->username .' <span class="pull-right">' .ThreadModel::getElapsedTime($value->date_created) .'</span></small>
           <a href="thread/' .$value->pk_thread_id .'"><img src="' .WORKING_DIR .'public/img/' .$value->image_name .'" width="950" class="img-responsive" alt=""></a>
-          <p><i class="glyphicon glyphicon-share-alt"></i> 3 Replies <span class="pull-right"><a href="thread/' .$value->pk_thread_id .'">#' .$value->pk_thread_id .'</a></span></p>
+          <p><i class="glyphicon glyphicon-share-alt"></i> '.$value->replies .' Replies <span class="pull-right">';
+      if(Session::isLoggedIn())
+      {
+        echo '<a href="yaya">Ban User</a> | <a href="' .WORKING_DIR .'computer/delete/' .$value->pk_thread_id .'" onclick="if(!confirm(\'Sure you want to delete?\')){ return false; };">Delete</a> | ';
+      }
+
+      echo '<a href="thread/' .$value->pk_thread_id .'">#' .$value->pk_thread_id .'</a></span></p>
         </div>';
+
       if($key % 4 == 3)
       {
         echo '</div>';

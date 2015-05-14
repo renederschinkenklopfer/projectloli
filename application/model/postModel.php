@@ -3,22 +3,11 @@
   class PostModel
   {
 
-	 public function createPost($thread_id, $username, $comment, $image_name)
-    {
-      $database = Database::getFactory()->getConnection();
-
-      $sql = "INSERT INTO `webapp`.`post` (`username`, `message`, `image_name`, `date_created`, `fk_thread_id`) VALUES (:username, :comment, :image_name, CURRENT_TIMESTAMP, :thread_id);";
-      $query = $database->prepare($sql);
-      $query->execute(array(':username' => $username, ':comment' => $comment, ':image_name' => $image_name, ':thread_id' => $thread_id));
-
-    }
- 
-
     public function getThreadPost($thread_id)
     {
       $database = Database::getFactory()->getConnection();
 
-      $sql = "SELECT pk_thread_id, username, threadname, message, image_name, date_created, fk_board_id FROM thread WHERE pk_thread_id = :thread_id";
+      $sql = "SELECT pk_thread_id, username, threadname, message, image_name, date_created, staff, fk_board_id FROM thread WHERE pk_thread_id = :thread_id";
       $query = $database->prepare($sql);
       $query->execute(array(':thread_id' => $thread_id));
 
@@ -30,11 +19,21 @@
     {
       $database = Database::getFactory()->getConnection();
 
-      $sql = "SELECT pk_post_id, username, message, image_name, date_created FROM post WHERE fk_thread_id = :thread_id";
+      $sql = "SELECT pk_post_id, username, message, image_name, date_created, staff FROM post WHERE fk_thread_id = :thread_id";
       $query = $database->prepare($sql);
       $query->execute(array(':thread_id' => $thread_id));
 
       return $query->fetchAll();
+    }
+
+
+    public function createPost($thread_id, $username, $comment, $image_name, $staff = false)
+    {
+       $database = Database::getFactory()->getConnection();
+
+       $sql = "INSERT INTO `webapp`.`post` (`username`, `message`, `image_name`, `date_created`, `staff`, `fk_thread_id`) VALUES (:username, :comment, :image_name, CURRENT_TIMESTAMP, :staff, :thread_id);";
+       $query = $database->prepare($sql);
+       $query->execute(array(':username' => $username, ':comment' => $comment, ':image_name' => $image_name, ':staff' => $staff, ':thread_id' => $thread_id));
     }
 
     public static function getElapsedTime($ptime)

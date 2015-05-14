@@ -6,6 +6,9 @@
 		public function __construct()
 		{
 
+			//Wichtig, dass bei jedem Controller der Vater-Controller aufgerufen wird.
+			parent::__construct();
+
 		}
 
 		public function index()
@@ -15,18 +18,107 @@
 			$this->renderLayoutView('computer', ['threads' => $threadModel->getAllThreads()]);
 		}
 
+
+		public function create()
+		{
+			if($_POST["username"])
+			{
+				$username = trim($_POST["username"]);
+			}
+			else
+			{
+				$username = "Anonymous";
+			}
+
+			$subject = trim($_POST["subject"]);
+			$comment = trim($_POST["comment"]);
+
+			if(is_uploaded_file($_FILES["fileToUpload"]["tmp_name"]))
+			{
+				$new_filename = substr(md5(uniqid(rand(), true)), 14) ."." .pathinfo($_FILES["fileToUpload"]["name"], PATHINFO_EXTENSION);
+				move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], getcwd() ."\\public\\img\\" .$new_filename);
+			}
+			else
+			{
+				$new_filename = 0;
+			}
+
+			$threadModel = $this->loadModel('thread');
+			$threadModel->createThread($username, $subject, $comment, $new_filename);
+			header('Location: ' .WORKING_DIR .'computer/');
+			exit();
+		}
+
+
+		public function delete($thread_id = 0)
+		{
+			//Nur eingeloggte User dürfen Threads löschen
+			Session::authenticatedOnly();
+
+			if($thread_id != 0)
+			{
+				$threadModel = $this->loadModel('thread');
+				if($threadModel->deleteThread($thread_id))
+				{
+					header('Location: ' .WORKING_DIR .'computer/');
+					exit();
+				}
+				else
+				{
+					header('Location: ' .WORKING_DIR .'computer/');
+					exit();
+				}
+			}
+			else
+			{
+				header('Location: ' .WORKING_DIR .'computer/');
+				exit();
+			}
+		}
+
+
 		public function thread($thread_id = 0)
 		{
 			if($thread_id === "create")
 			{
-				$thread_id = $_POST["thread_id"];
-				$username = $_POST["username"];
-				$comment = $_POST["comment"];
-				move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], getcwd() ."\\public\\img\\test.jpg");
-				
+				$thread_id = trim($_POST["thread_id"]);
+
+				if(Session::isLoggedIn())
+				{
+					$username = $_SESSION["username"];
+					$staff = true;
+				}
+				else
+				{
+					if($_POST["username"])
+					{
+						$username = trim($_POST["username"]);
+					}
+					else
+					{
+						$username = "Anonymous";
+					}
+
+					$staff = false;
+				}
+
+				$comment = trim($_POST["comment"]);
+
+				if(is_uploaded_file($_FILES["fileToUpload"]["tmp_name"]))
+				{
+					$new_filename = substr(md5(uniqid(rand(), true)), 14) ."." .pathinfo($_FILES["fileToUpload"]["name"], PATHINFO_EXTENSION);
+					move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], getcwd() ."\\public\\img\\" .$new_filename);
+				}
+				else
+				{
+					$new_filename = 0;
+				}
+
+
 				$postModel = $this->loadModel('post');
-				$postModel->createPost($thread_id, $username, $comment, "test.jpg");
+				$postModel->createPost($thread_id, $username, $comment, $new_filename, $staff);
 				header('Location: /projectloli/computer/thread/' .$thread_id);
+				exit();
 			}
 			else
 			{

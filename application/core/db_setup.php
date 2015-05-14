@@ -12,9 +12,7 @@
 	(
 		pk_user_id INT PRIMARY KEY AUTO_INCREMENT,
 		username VARCHAR(15) NOT NULL,
-		password BINARY(60) NOT NULL,
-		mail VARCHAR(20) NOT NULL,
-		last_login TIMESTAMP NOT NULL
+		password BINARY(60) NOT NULL
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;');
 
 	$database->query('
@@ -34,8 +32,9 @@
 		image_name VARCHAR(25) NOT NULL,
 		likes INT NOT NULL,
 		date_created TIMESTAMP NOT NULL,
+		staff BOOL NOT NULL DEFAULT FALSE,
 		fk_board_id INT NOT NULL,
-		FOREIGN KEY (fk_board_id) REFERENCES board(pk_board_id)
+		FOREIGN KEY (fk_board_id) REFERENCES board(pk_board_id) ON DELETE CASCADE
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;');
 
 
@@ -47,8 +46,9 @@
 		message TEXT NOT NULL,
 		image_name VARCHAR(25) NOT NULL,
 		date_created TIMESTAMP NOT NULL,
+		staff BOOL NOT NULL DEFAULT FALSE,
 		fk_thread_id INT NOT NULL,
-		FOREIGN KEY (fk_thread_id) REFERENCES thread(pk_thread_id)
+		FOREIGN KEY (fk_thread_id) REFERENCES thread(pk_thread_id) ON DELETE CASCADE
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;');
 
 	$database->query("INSERT INTO `webapp`.`board` (`pk_board_id`, `board_name`) VALUES (NULL, 'Computer/Tech');");
@@ -96,6 +96,7 @@
 	lg anon', '1339.jpg', '133', '2015-05-10 15:00:23', '1');");
 	$database->query("INSERT INTO `webapp`.`post` (`pk_post_id`, `username`, `message`, `image_name`, `date_created`, `fk_thread_id`) VALUES (NULL, 'Anon', 'aha alles kla', '1338.jpg', '2015-05-10 20:57:25', '1');");
 	$database->query("INSERT INTO `webapp`.`post` (`pk_post_id`, `username`, `message`, `image_name`, `date_created`, `fk_thread_id`) VALUES (NULL, 'Anon', 'aha alles kla', '1338.jpg', '2015-05-10 20:57:25', '1');");
+	$database->query('INSERT INTO `webapp`.`user` (`username`, `password`) VALUES (\'admin\', \'$2y$10$CGrj7l8Dxdj3TjTTG/5bt.6xs3twQ6OqmqnjAD28UavvhFZIsX.9u\');');
 
 
 ?>
