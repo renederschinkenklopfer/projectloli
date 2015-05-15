@@ -15,9 +15,18 @@
 		{
 			$threadModel = $this->loadModel('thread');
 			$this->title = "Computer/Tech";
-			$this->renderLayoutView('computer', ['threads' => $threadModel->getAllThreads()]);
+			$page = 1;
+			$this->renderLayoutView('computer', ['page' => $page, 'threads' => $threadModel->getAllThreads(1, $page)]);
 		}
-
+		
+		
+		public function page($page)
+		{
+			$threadModel = $this->loadModel('thread');
+			$this->title = "Computer/Tech";
+			$this->renderLayoutView('computer', ['page' => $page, 'threads' => $threadModel->getAllThreads(1, $page)]);
+		}
+		
 
 		public function create()
 		{

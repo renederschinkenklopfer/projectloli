@@ -53,8 +53,7 @@
     }
 
     ?>
-    </div>
-
+		</div>
 		<div align="center">
 			<nav>
 			  <ul class="pagination">
@@ -63,11 +62,11 @@
 					<span aria-hidden="true">&laquo;</span>
 				  </a>
 				</li>
-				<li><a href="#">1</a></li>
-				<li><a href="#">2</a></li>
-				<li><a href="#">3</a></li>
-				<li><a href="#">4</a></li>
-				<li><a href="#">5</a></li>
+				<li class="<?php if($this->page == 1) { echo 'active'; } ?>"><a href="<?php echo WORKING_DIR; ?>computer">1</a></li>
+				<li class="<?php if($this->page == 2) { echo 'active'; } ?>"><a href="<?php echo WORKING_DIR; ?>computer/page/2">2</a></li>
+				<li class="<?php if($this->page == 3) { echo 'active'; } ?>"><a href="<?php echo WORKING_DIR; ?>computer/page/3">3</a></li>
+				<li class="<?php if($this->page == 4) { echo 'active'; } ?>"><a href="<?php echo WORKING_DIR; ?>computer/page/4">4</a></li>
+				<li class="<?php if($this->page == 5) { echo 'active'; } ?>"><a href="<?php echo WORKING_DIR; ?>computer/page/5">5</a></li>
 				<li>
 				  <a href="#" aria-label="Weiter">
 					<span aria-hidden="true">&raquo;</span>
@@ -76,4 +75,4 @@
 			  </ul>
 			</nav>
 		</div>
-    </div>
+    

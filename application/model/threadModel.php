@@ -3,13 +3,17 @@
   class ThreadModel
   {
 
-    public function getAllThreads()
+    public function getAllThreads($board_id, $page = 1)
     {
+	  $page = ($page - 1) * 20;
+	  
       $database = Database::getFactory()->getConnection();
 
-      $sql = "SELECT thread.pk_thread_id, thread.username, thread.threadname, thread.message, thread.image_name, thread.likes, thread.date_created, COUNT(fk_thread_id) AS replies FROM thread LEFT JOIN post ON fk_thread_id = pk_thread_id WHERE fk_board_id = :board_id GROUP BY pk_thread_id ORDER BY pk_thread_id DESC";
+      $sql = "SELECT thread.pk_thread_id, thread.username, thread.threadname, thread.message, thread.image_name, thread.likes, thread.date_created, COUNT(fk_thread_id) AS replies FROM thread LEFT JOIN post ON fk_thread_id = pk_thread_id WHERE fk_board_id = :board_id GROUP BY pk_thread_id ORDER BY pk_thread_id DESC LIMIT :page, 20";
       $query = $database->prepare($sql);
-      $query->execute(array(':board_id' => 1));
+	  $query->bindParam(':board_id', $board_id, PDO::PARAM_INT);
+	  $query->bindParam(':page', $page, PDO::PARAM_INT);
+	  $query->execute();
 
       return $query->fetchAll();
     }
