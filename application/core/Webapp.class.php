@@ -36,6 +36,7 @@
 
 			$this->params = $url ? array_values($url) : [];
 			call_user_func_array([$this->controller, $this->method], $this->params);
+
 		}
 
 
@@ -52,19 +53,6 @@
 
 			return $url;
 		}
-/*
-		private function loadController($controller_name)
-		{
-			if(file_exists(CONTROLLER_PATH .$controller_name .".controller.php"))
-			{
-				require_once CONTROLLER_PATH .$controller_name .".controller.php";
-			}
-			else
-			{
-				require_once CONTROLLER_PATH ."404.controller.php";
-			}
-		}
-*/
 
 	}
 

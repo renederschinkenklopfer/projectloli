@@ -54,6 +54,20 @@
     </nav>
 
     <div class="container">
+      <?php
+        if(!$this->error[0])
+        {
+          echo '
+            <div class="row">
+              <div class="col-md-3"></div>
+              <div class="col-md-6">
+                <div class="alert alert-danger" role="alert">' .$this->error[1] .'</div>
+              </div>
+              <div class="col-md-3"></div>
+            </div>';
+        }
+      ?>
+
       <div id="postThread" style="display: none;" class="row">
       <div class="col-md-3"></div>
       <div class="col-md-6">
@@ -71,7 +85,7 @@
                 <input id="uploadFile" class="fileUploadInput hidden-xs" placeholder="" disabled="disabled" />
               </li>
             </ul>
-            <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-share"></i> Post</button>
+            <button name="btnPost" type="submit" class="btn btn-success"><i class="glyphicon glyphicon-share"></i> Post</button>
           </div>
         </form>
       </div>
@@ -79,9 +93,8 @@
       </div>
       <div class="row">
           <div class="col-xs-12"><b><?php if($this->thread->staff == 1) { echo '<font color="red">' .htmlentities($this->thread->username) .' ## Admin</font>'; } else { echo htmlentities($this->thread->username); } ?></b> <span class="pull-right"><?php echo PostModel::getElapsedTime($this->thread->date_created); ?> &nbsp; #<?php echo $this->thread->pk_thread_id; ?></span></div>
-          <div class="col-xs-4 col-md-3"><img src="<?php echo WORKING_DIR ?>public/img/<?php echo $this->thread->image_name; ?>" class="img-responsive" /></div>
+          <div class="col-xs-4 col-md-3"><?php echo '<a href="' .WORKING_DIR .'public/img/' .$this->thread->image_name .'">'; ?><img src="<?php echo WORKING_DIR ?>public/img/<?php echo $this->thread->image_name; ?>" class="img-responsive" /></a></div>
           <div class="col-xs-8 col-md-9"><h4 style="margin-top: 0px;"><?php echo htmlentities($this->thread->threadname); ?></h4><?php echo nl2br(htmlentities($this->thread->message)); ?></div>
-          <div class="col-xs-12"><span class="pull-right"><a href="">Reply</a></span></div>
       </div>
       <?php
 
@@ -111,9 +124,7 @@
 		          echo '<div class="col-xs-12">' .nl2br(htmlentities($value->message)) .'</div>';
           }
 
-          echo'
-              <div class="col-xs-12"><span class="pull-right"><a href="">Reply</a></span></div>
-          </div>';
+          echo'</div>';
         }
       ?>
     </div>

@@ -11,7 +11,7 @@
 		}
 
 
-		public function loadModel($model)
+		protected function loadModel($model)
 		{
 			if(file_exists(MODEL_PATH . $model . "Model.php"))
 			{
@@ -29,7 +29,7 @@
 
 
 		//Funktion um eine View MIT Header und Footer zu rendern
-		public function renderLayoutView($view, $data = [])
+		protected function renderLayoutView($view, $data = [])
 		{
 
 			foreach ($data as $key => $value)
@@ -50,7 +50,7 @@
 		}
 
 		//Funktion um eine View OHNE Header und Footer zu rendern
-		public function renderView($view, $data = [])
+		protected function renderView($view, $data = [])
 		{
 
 			foreach ($data as $key => $value)

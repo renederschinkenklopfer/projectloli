@@ -27,6 +27,54 @@
     }
 
 
+    public function createPostValidate($thread_id, $username, $comment, $image)
+    {
+      $database = Database::getFactory()->getConnection();
+
+      $sql = "SELECT pk_thread_id FROM thread WHERE pk_thread_id = :thread_id";
+      $query = $database->prepare($sql);
+      $query->execute(array(':thread_id' => $thread_id));
+      $result = $query->fetch();
+
+      if($result)
+      {
+        if((!empty($username) || Session::isLoggedIn()) && !empty($comment))
+        {
+          if(Session::isLoggedIn())
+          {
+            $post_info = array('username' => $_SESSION["username"], 'staff' => true, 'comment' => trim($comment));
+          }
+          else
+          {
+            $post_info = array('username' => trim($username), 'staff' => false, 'comment' => trim($comment));
+          }
+
+          $post_info["complete"] = true;
+
+          if(is_uploaded_file($image["tmp_name"]))
+          {
+            $post_info["image"] = true;
+          }
+          else
+          {
+            $post_info["image"] = false;
+          }
+        }
+        else
+        {
+          $post_info["complete"] = false;
+        }
+
+        $post_info["thread_id"] = $thread_id;
+      }
+      else
+      {
+        $post_info["thread_id"] = false;
+      }
+
+      return $post_info;
+    }
+
     public function createPost($thread_id, $username, $comment, $image_name, $staff = false)
     {
        $database = Database::getFactory()->getConnection();

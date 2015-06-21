@@ -3,6 +3,7 @@
   class Session
   {
 
+    
     public static function start()
     {
       if(empty(session_id()))
@@ -11,6 +12,7 @@
       }
     }
 
+    //Statische Methode um Controller-Methoden nur eingeloggten Benutzern zur Verfügung zu stellen
     public static function authenticatedOnly()
     {
       if(!Session::isLoggedIn())
@@ -18,9 +20,9 @@
         header('Location: ' .WORKING_DIR. 'login');
         exit();
       }
-
     }
 
+    //Statische Methode zum prüfen, ob ein User eingeloggt ist
     public static function isLoggedIn()
     {
       if(isset($_SESSION["user_logged_in"]))

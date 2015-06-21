@@ -11,51 +11,106 @@
 
 		}
 
-		public function index()
+		public function index($page = 1, $error = array(true, ""))
 		{
 			$threadModel = $this->loadModel('thread');
 			$this->title = "Computer/Tech";
-			$page = 1;
-			$this->renderLayoutView('computer', ['page' => $page, 'threads' => $threadModel->getAllThreads(1, $page)]);
+			$this->renderLayoutView('board', ['error' => $error, 'page' => $page, 'threads' => $threadModel->getAllThreadsBoard(1, $page)]);
 		}
-		
-		
+
+
 		public function page($page)
 		{
-			$threadModel = $this->loadModel('thread');
-			$this->title = "Computer/Tech";
-			$this->renderLayoutView('computer', ['page' => $page, 'threads' => $threadModel->getAllThreads(1, $page)]);
+			$this->index($page);
 		}
-		
+
 
 		public function create()
 		{
-			if($_POST["username"])
+			if(isset($_POST['btnPost']))
 			{
-				$username = trim($_POST["username"]);
+				$threadModel = $this->loadModel('thread');
+				if($thread_info = $threadModel->createThreadValidate(Request::post("username"), Request::post("subject"), Request::post("comment"), Request::files("fileToUpload")))
+				{
+					$uploadModel = $this->loadModel('upload');
+					$img_name = $uploadModel->uploadImg(Request::files("fileToUpload"));
+				}
+				else
+				{
+					$img_name = array(false, "Bitte alle Felder ausfüllen oder Bild zu gross (max. 2MB).");
+				}
+
+				if($img_name[0])
+				{
+					$threadModel->createThread($thread_info["username"], $thread_info["staff"], $thread_info["subject"], $thread_info["comment"], $img_name[1], 1);
+					header('Location: ' .WORKING_DIR .'computer/');
+					exit();
+				}
+				else
+				{
+					$this->index(1, $img_name);
+				}
+
 			}
 			else
 			{
-				$username = "Anonymous";
+				$this->index();
 			}
+		}
 
-			$subject = trim($_POST["subject"]);
-			$comment = trim($_POST["comment"]);
 
-			if(is_uploaded_file($_FILES["fileToUpload"]["tmp_name"]))
+		public function pin($thread_id = 0)
+		{
+			//Nur eingeloggte User dürfen Threads sticken
+			Session::authenticatedOnly();
+
+			if($thread_id != 0)
 			{
-				$new_filename = substr(md5(uniqid(rand(), true)), 14) ."." .pathinfo($_FILES["fileToUpload"]["name"], PATHINFO_EXTENSION);
-				move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], getcwd() ."\\public\\img\\" .$new_filename);
+				$threadModel = $this->loadModel('thread');
+				if($threadModel->pinThread($thread_id))
+				{
+					header('Location: ' .WORKING_DIR .'computer/');
+					exit();
+				}
+				else
+				{
+					$error = array(false, "Thread kann nich gepint werden, weil er nicht existiert");
+					$this->index(1, $error);
+				}
+
 			}
 			else
 			{
-				$new_filename = 0;
+				header('Location: ' .WORKING_DIR .'computer/');
+				exit();
 			}
+		}
 
-			$threadModel = $this->loadModel('thread');
-			$threadModel->createThread($username, $subject, $comment, $new_filename);
-			header('Location: ' .WORKING_DIR .'computer/');
-			exit();
+		public function unpin($thread_id = 0)
+		{
+			//Nur eingeloggte User dürfen Threads sticken
+			Session::authenticatedOnly();
+
+			if($thread_id != 0)
+			{
+				$threadModel = $this->loadModel('thread');
+				if($threadModel->unpinThread($thread_id))
+				{
+					header('Location: ' .WORKING_DIR .'computer/');
+					exit();
+				}
+				else
+				{
+					$error = array(false, "Thread kann nich geunpined werden, weil er nicht existiert");
+					$this->index(1, $error);
+				}
+
+			}
+			else
+			{
+				header('Location: ' .WORKING_DIR .'computer/');
+				exit();
+			}
 		}
 
 
@@ -74,8 +129,8 @@
 				}
 				else
 				{
-					header('Location: ' .WORKING_DIR .'computer/');
-					exit();
+					$error = array(false, "Thread kann nich gelöscht werden, weil er nicht existiert.");
+					$this->index(1, $error);
 				}
 			}
 			else
@@ -86,48 +141,54 @@
 		}
 
 
-		public function thread($thread_id = 0)
+		public function thread($thread_id = 0, $error = array(true, ""))
 		{
 			if($thread_id === "create")
 			{
-				$thread_id = trim($_POST["thread_id"]);
-
-				if(Session::isLoggedIn())
+				if(isset($_POST['btnPost']) && isset($_POST['thread_id']))
 				{
-					$username = $_SESSION["username"];
-					$staff = true;
-				}
-				else
-				{
-					if($_POST["username"])
+					$postModel = $this->loadModel('post');
+			    $post_info = $postModel->createPostValidate(Request::post("thread_id"), Request::post("username"), Request::post("comment"), Request::files("fileToUpload"));
+					if($post_info["thread_id"])
 					{
-						$username = trim($_POST["username"]);
+						if($post_info["complete"])
+						{
+							$img_name = array(true, "0");
+
+							if($post_info["image"])
+							{
+								$uploadModel = $this->loadModel('upload');
+					      $img_name = $uploadModel->uploadImg(Request::files("fileToUpload"));
+							}
+
+							if($img_name[0])
+							{
+								$postModel->createPost($post_info["thread_id"], $post_info["username"], $post_info["comment"], $img_name[1], $post_info["staff"]);
+								header('Location: ' .WORKING_DIR .'computer/thread/' .$post_info["thread_id"]);
+								exit();
+							}
+							else
+							{
+								$error = $img_name;
+								$this->thread($post_info["thread_id"], $error);
+							}
+						}
+						else
+						{
+							$error = array(false, "Bitte alle Felder ausfüllen oder Bild zu gross (max. 2MB).");
+							$this->thread($post_info["thread_id"], $error);
+						}
 					}
 					else
 					{
-						$username = "Anonymous";
+						$error = array(false, "Thread existiert nicht.");
+						$this->index(1, $error);
 					}
-
-					$staff = false;
-				}
-
-				$comment = trim($_POST["comment"]);
-
-				if(is_uploaded_file($_FILES["fileToUpload"]["tmp_name"]))
-				{
-					$new_filename = substr(md5(uniqid(rand(), true)), 14) ."." .pathinfo($_FILES["fileToUpload"]["name"], PATHINFO_EXTENSION);
-					move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], getcwd() ."\\public\\img\\" .$new_filename);
 				}
 				else
 				{
-					$new_filename = 0;
+					$this->index();
 				}
-
-
-				$postModel = $this->loadModel('post');
-				$postModel->createPost($thread_id, $username, $comment, $new_filename, $staff);
-				header('Location: /projectloli/computer/thread/' .$thread_id);
-				exit();
 			}
 			else
 			{
@@ -136,7 +197,7 @@
 				if($threadPost)
 				{
 					$this->title = $threadPost->threadname;
-					$this->renderView('thread', ['thread' => $threadPost, 'posts' => $postModel->getAllPosts($thread_id)]);
+					$this->renderView('thread', ['error' => $error, 'thread' => $threadPost, 'posts' => $postModel->getAllPosts($thread_id)]);
 				}
 				else
 				{

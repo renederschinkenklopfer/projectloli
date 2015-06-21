@@ -23,9 +23,10 @@ body {
 	margin-bottom: 5px;
 }
 
+/* Thread */
 .thread-space
 {
-  margin-top: 30px;
+  margin-top: 40px;
 }
 
 
@@ -87,11 +88,4 @@ body {
     cursor: pointer;
     opacity: 0;
     filter: alpha(opacity=0);
-}
-
-
-
-/* Thread */
-.row {
-  margin-top: 40px;
 }
