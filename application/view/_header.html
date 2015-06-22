@@ -23,11 +23,11 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="<?php if(get_class($this) == 'Index') { echo 'active'; } ?>" ><a href="<?php echo WORKING_DIR ?>">New</a></li>
-            <li class="<?php if(get_class($this) == 'Computer') { echo 'active'; } ?>"><a href="<?php echo WORKING_DIR ?>computer/">Computer/Tech</a></li>
+            <li class="<?php if(get_class($this) == 'Computer') { echo 'active'; } ?>"><a href="<?php echo WORKING_DIR ?>computer/">Computer</a></li>
             <li class="<?php if(get_class($this) == 'Gif') { echo 'active'; } ?>"><a href="<?php echo WORKING_DIR ?>gif/">Gif</a></li>
             <li class="<?php if(get_class($this) == 'Nsfw') { echo 'active'; } ?>"><a href="<?php echo WORKING_DIR ?>over18/">+18</a></li>
-            <li class="<?php if(get_class($this) == 'Popular') { echo 'active'; } ?>"><a href="<?php echo WORKING_DIR ?>popular/">Most Popular</a></li>
-            <li class="<?php if(get_class($this) == 'Rated') { echo 'active'; } ?>"><a href="<?php echo WORKING_DIR ?>rated/">Best rated</a></li>
+            <li class="<?php if(get_class($this) == 'Funny') { echo 'active'; } ?>"><a href="<?php echo WORKING_DIR ?>funny/">Funny</a></li>
+            <li class="<?php if(get_class($this) == 'Nosleep') { echo 'active'; } ?>"><a href="<?php echo WORKING_DIR ?>nosleep/">Nosleep</a></li>
       			<?php
       				if(Session::isLoggedIn())
       				{
@@ -39,6 +39,15 @@
       						</ul>
       				</li>';
       				}
+              else
+              {
+                echo '<li class="';
+                if(get_class($this) == 'Login')
+                {
+                  echo 'active';
+                }
+                echo '"><a href="' .WORKING_DIR .'login/">Login</a></li>';
+              }
       			?>
           </ul>
           <?php

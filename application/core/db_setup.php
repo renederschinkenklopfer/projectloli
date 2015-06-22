@@ -1,5 +1,24 @@
 <?php
 
+/**
+ * db_setup.php
+ *
+ * SQL-Befehle für die Datenbankstruktur, sowie Testdaten einfügen
+ *
+ * PHP version 5
+ *
+ * LICENSE: This source file is subject to version 3.01 of the PHP license
+ * that is available through the world-wide-web at the following URI:
+ * http://www.php.net/license/3_01.txt.  If you did not receive a copy of
+ * the PHP License and are unable to obtain it through the web, please
+ * send a note to license@php.net so we can mail you a copy immediately.
+ *
+ * @copyright  2015 Yolo Inc.
+ * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @version    1.0
+ */
+
+
 	$database = Database::getFactory()->getConnection();
 
 	$database->query('DROP DATABASE IF EXISTS webapp;');
@@ -43,7 +62,6 @@
 		FOREIGN KEY (fk_thread_id) REFERENCES thread(pk_thread_id) ON DELETE CASCADE
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;');
 
-	//$database->query("INSERT INTO `webapp`.`board` (`pk_board_id`, `board_name`) VALUES (NULL, 'Computer/Tech');");
 	$database->query("INSERT INTO `webapp`.`thread` (`pk_thread_id`, `username`, `threadname`, `message`, `image_name`, `date_created`, `fk_board_id`) VALUES (NULL, 'Anonymous', 'Jo so lässig', 'hoi zäme, also ich finds eifach würkli eh saueri was mit dem wc-rand passiert isch
 	lg anon', '1337.jpg', '2015-05-10 15:00:23', '1');");
 	$database->query("INSERT INTO `webapp`.`thread` (`pk_thread_id`, `username`, `threadname`, `message`, `image_name`, `date_created`, `fk_board_id`) VALUES (NULL, 'Anonymous', 'g654g', 'hoi zäme, also ich finds eifach würkli eh saueri was mit dem wc-rand passiert isch

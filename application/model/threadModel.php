@@ -1,15 +1,35 @@
 <?php
 
+/**
+ * threadModel.php
+ *
+ * Model für Thread Operationen.
+ *
+ * PHP version 5
+ *
+ * LICENSE: This source file is subject to version 3.01 of the PHP license
+ * that is available through the world-wide-web at the following URI:
+ * http://www.php.net/license/3_01.txt.  If you did not receive a copy of
+ * the PHP License and are unable to obtain it through the web, please
+ * send a note to license@php.net so we can mail you a copy immediately.
+ *
+ * @copyright  2015 Yolo Inc.
+ * @license    http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @version    1.0
+ */
+
+
   class ThreadModel
   {
 
+	//Methode um alle Threads eines Boards anzuzeigen und zu ordnen
     public function getAllThreadsBoard($board_id, $page = 1)
     {
 	     $page = ($page - 1) * 20;
 
        $database = Database::getFactory()->getConnection();
-
-      $sql = "SELECT thread.pk_thread_id, thread.sticky, thread.username, thread.staff, thread.threadname, thread.message, thread.image_name, thread.date_created, GREATEST(thread.date_created, COALESCE(MAX(post.date_created), 0)) as datemax, COUNT(fk_thread_id) AS replies FROM thread LEFT JOIN post ON fk_thread_id = pk_thread_id WHERE fk_board_id = :board_id GROUP BY pk_thread_id ORDER BY sticky DESC, datemax DESC LIMIT :page, 20";
+	  //Anzeigen aller Threads aus einem bestimmten Board/Kategorie. Stickys werden zuerst angezeigt. Nachher wird nach neusten/Zuletzt geänderten (Post hinzugefügt) Threads geordnet. 
+      $sql = "SELECT thread.pk_thread_id, thread.sticky, thread.username, thread.staff, thread.threadname, thread.message, thread.image_name, thread.date_created, thread.fk_board_id, GREATEST(thread.date_created, COALESCE(MAX(post.date_created), 0)) as datemax, COUNT(fk_thread_id) AS replies FROM thread LEFT JOIN post ON fk_thread_id = pk_thread_id WHERE fk_board_id = :board_id GROUP BY pk_thread_id ORDER BY sticky DESC, datemax DESC LIMIT :page, 20";
       $query = $database->prepare($sql);
   	  $query->bindParam(':board_id', $board_id, PDO::PARAM_INT);
   	  $query->bindParam(':page', $page, PDO::PARAM_INT);
@@ -18,13 +38,14 @@
       return $query->fetchAll();
     }
 
+	//Methode um alle Threads aus allen Boards anzuzeigen und zu ornden
     public function getAllThreads($page = 1)
     {
 	     $page = ($page - 1) * 20;
 
        $database = Database::getFactory()->getConnection();
-
-      $sql = "SELECT thread.pk_thread_id, thread.sticky, thread.username, thread.staff, thread.threadname, thread.message, thread.image_name, thread.date_created, GREATEST(thread.date_created, COALESCE(MAX(post.date_created), 0)) as datemax, COUNT(fk_thread_id) AS replies FROM thread LEFT JOIN post ON fk_thread_id = pk_thread_id GROUP BY pk_thread_id ORDER BY sticky DESC, datemax DESC LIMIT :page, 20";
+	  //Anzeigen aller Threads aus allen Board/Kategorie. Geordnet nach neusten Threads/Zuletzt geänderten (Post hinzugefügt) Threads zuerst. Ausgeblendet werden Stickys und 18+ Threads.
+      $sql = "SELECT thread.pk_thread_id, thread.sticky, thread.username, thread.staff, thread.threadname, thread.message, thread.image_name, thread.date_created, thread.fk_board_id, GREATEST(thread.date_created, COALESCE(MAX(post.date_created), 0)) as datemax, COUNT(fk_thread_id) AS replies FROM thread LEFT JOIN post ON fk_thread_id = pk_thread_id WHERE sticky = 0 AND fk_board_id != 3 GROUP BY pk_thread_id ORDER BY datemax DESC LIMIT :page, 20";
       $query = $database->prepare($sql);
   	  $query->bindParam(':page', $page, PDO::PARAM_INT);
   	  $query->execute();
@@ -32,6 +53,7 @@
       return $query->fetchAll();
     }
 
+	//Methode um zu validieren, ob alle Anforderungen erfüllt wurden, um einen neuen Thread zu erstellen
     public function createThreadValidate($username, $subject, $comment, $image)
     {
       if((!empty($username) || Session::isLoggedIn()) && !empty($subject) && !empty($comment) && is_uploaded_file($image["tmp_name"]))
@@ -53,7 +75,7 @@
       return $thread_info;
     }
 
-
+	//Methode um einen neuen Thread in der Datenbank zu erstellen
     public function createThread($username, $staff, $subject, $comment, $image_name, $board_id)
     {
        $database = Database::getFactory()->getConnection();
@@ -63,7 +85,7 @@
        $query->execute(array(':username' => $username, ':staff' => $staff, ':subject' => $subject, ':comment' => $comment, ':image_name' => $image_name, ':fk_board_id' => $board_id));
     }
 
-
+	//Methode um als Administrator einen Thread zu pinnen (dass er immer ganz oben angezeigt wird)
     public function pinThread($thread_id)
     {
       $database = Database::getFactory()->getConnection();
@@ -89,6 +111,7 @@
       return $status;
     }
 
+	//Methode um als Administrator einen Thread zu entpinnen
     public function unpinThread($thread_id)
     {
       $database = Database::getFactory()->getConnection();
@@ -114,7 +137,7 @@
       return $status;
     }
 
-
+	//Methode um einen Thread aus der Datenbank, sowie die dazugehörigen Files auf der Festplatte zu löschen
     public function deleteThread($thread_id)
     {
        $database = Database::getFactory()->getConnection();
@@ -161,7 +184,7 @@
 
     }
 
-
+	//Methode um von einem Datum die vergangene Zeit zurückzugeben 2015-03-15 15:00:00 -> 3hours ago
     public static function getElapsedTime($ptime)
     {
         $etime = time() - strtotime($ptime);

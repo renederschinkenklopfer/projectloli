@@ -1,9 +1,9 @@
 <?php
 
 /**
- * error404.controller.php
+ * funny.controller.php
  *
- * Controller für einen 404-Fehler. Wird aufgerufen, wenn eine Ressource nicht gefunden wurde.
+ * Controller für das Board "Funny". Das Topic dieses Boards sollen lustige Themen sein.
  *
  * PHP version 5
  *
@@ -19,23 +19,23 @@
  */
 
 
-	class Error404 extends Controller
+	class Funny extends Board
 	{
+		public $board_id = 4;
 
 		public function __construct()
 		{
-
-			//Wichtig, dass bei jedem Controller der Vater-Controller aufgerufen wird.
-			parent::__construct();
+			parent::__construct($this->board_id);
 
 		}
 
-		public function index()
-		{
-      header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
-			$this->title = "404 Not Found";
-      $this->renderLayoutView('404');
-		}
+		public function index($page = 1, $error = array(true, ""))
+	  {
+	    $threadModel = $this->loadModel('thread');
+	    $this->title = "Funny Stuff";
+	    $this->renderLayoutView('board', ['error' => $error, 'page' => $page, 'threads' => $threadModel->getAllThreadsBoard($this->board_id, $page)]);
+	  }
+
+
 	}
-
 ?>

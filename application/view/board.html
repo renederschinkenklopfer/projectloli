@@ -47,6 +47,9 @@
 
     foreach($this->threads as $key => $value)
     {
+      $board_name = getBoard($value->fk_board_id);
+
+
       if($key % 4 == 0)
       {
         echo '<div class="row thread-space">';
@@ -65,7 +68,7 @@
 
         echo '</h4>
             <small><font color="red">' .htmlentities($value->username) .' ## Admin</font><span class="pull-right">' .ThreadModel::getElapsedTime($value->date_created) .'</span></small>
-            <a href="thread/' .$value->pk_thread_id .'"><img src="' .WORKING_DIR .'public/img/' .$value->image_name .'" width="950" class="img-responsive" alt=""></a>
+            <a href="' .WORKING_DIR .$board_name .'/thread/' .$value->pk_thread_id .'"><img src="' .WORKING_DIR .'public/img/' .$value->image_name .'" width="950" class="img-responsive" alt=""></a>
             <p><i class="glyphicon glyphicon-share-alt"></i> '.$value->replies .' Replies <span class="pull-right">';
       }
       else
@@ -81,23 +84,30 @@
 
         echo'</h4>
             <small>' .$value->username .' <span class="pull-right">' .ThreadModel::getElapsedTime($value->date_created) .'</span></small>
-            <a href="thread/' .$value->pk_thread_id .'"><img src="' .WORKING_DIR .'public/img/' .$value->image_name .'" width="950" class="img-responsive" alt=""></a>
+            <a href="' .WORKING_DIR .$board_name .'/thread/' .$value->pk_thread_id .'"><img src="' .WORKING_DIR .'public/img/' .$value->image_name .'" width="950" class="img-responsive" alt=""></a>
             <p><i class="glyphicon glyphicon-share-alt"></i> '.$value->replies .' Replies <span class="pull-right">';
       }
 
       if(Session::isLoggedIn())
       {
-        if($value->sticky)
+        if(get_class($this) == "Index")
         {
-          echo '<a href="' .WORKING_DIR .strtolower(get_class($this)) .'/unpin/' .$value->pk_thread_id .'">Unpin Thread</a> | <a href="' .WORKING_DIR .strtolower(get_class($this)) .'/delete/' .$value->pk_thread_id .'" onclick="if(!confirm(\'Sure you want to delete?\')){ return false; };">Delete</a> | ';
+          echo '<a href="' .WORKING_DIR .strtolower(get_class($this)) .'/delete/' .$value->pk_thread_id .'" onclick="if(!confirm(\'Sure you want to delete?\')){ return false; };">Delete</a> | ';
         }
         else
         {
-          echo '<a href="' .WORKING_DIR .strtolower(get_class($this)) .'/pin/' .$value->pk_thread_id .'">Pin Thread</a> | <a href="' .WORKING_DIR .strtolower(get_class($this)) .'/delete/' .$value->pk_thread_id .'" onclick="if(!confirm(\'Sure you want to delete?\')){ return false; };">Delete</a> | ';
+          if($value->sticky)
+          {
+            echo '<a href="' .WORKING_DIR .strtolower(get_class($this)) .'/unpin/' .$value->pk_thread_id .'">Unpin Thread</a> | <a href="' .WORKING_DIR .strtolower(get_class($this)) .'/delete/' .$value->pk_thread_id .'" onclick="if(!confirm(\'Sure you want to delete?\')){ return false; };">Delete</a> | ';
+          }
+          else
+          {
+            echo '<a href="' .WORKING_DIR .strtolower(get_class($this)) .'/pin/' .$value->pk_thread_id .'">Pin Thread</a> | <a href="' .WORKING_DIR .strtolower(get_class($this)) .'/delete/' .$value->pk_thread_id .'" onclick="if(!confirm(\'Sure you want to delete?\')){ return false; };">Delete</a> | ';
+          }
         }
       }
 
-      echo '<a href="thread/' .$value->pk_thread_id .'">#' .$value->pk_thread_id .'</a></span></p>
+      echo '<a href="' .WORKING_DIR .$board_name .'/thread/' .$value->pk_thread_id .'">#' .$value->pk_thread_id .'</a></span></p>
         </div>';
 
       if($key % 4 == 3)
